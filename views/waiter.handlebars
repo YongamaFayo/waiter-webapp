@@ -1,0 +1,19 @@
+<div class="container">
+    <h1>{{this.waiter}}'s Schedule</h1>
+    <br>
+    <h3>Select shifts to work</h3>
+    <br>
+    <form action="/waiters/{{this.waiter}}" method="post">
+        {{#each daysList}}
+        <input type="checkbox"  name="day" value="{{this.weekdays}}" {{this.state}}>
+        <label for="all"> {{this.weekdays}}</label>
+        {{/each}}
+        <input type="submit" value="Add Days">
+    </form>
+     <div class="error">
+                <h3>
+                    {{messages.error}}
+                </h3>
+            </div>
+    <button><a href="/">home</a></button>
+</div>

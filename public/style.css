@@ -1,9 +1,35 @@
-h1 {
-    text-align: center;
-    margin-bottom: 5rem;
-    color: #00b5ad
-}
+ body {
+     text-align: center;
+     /* background-color: burlywood; */
+     background-image: url("/21838947.jpg");
+     background-repeat: no-repeat;
+     background-attachment: fixed;
+     background-size: cover;
+ } 
 
-body {
-    background-color: rgb(212, 184, 184);
-}
+ .container {
+     text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+    color: rgb(139, 99, 70);
+ }
+
+ .buttons {
+     block-size: 15em;
+ }
+
+ .name {
+     font: bold; 
+     font-size: 100%;
+     color: rgb(139, 99, 70);
+     font-family: 'Courier New', Courier, monospace;
+     
+ }
+
+ table {
+     width: 100%;
+     /* border: solid; */
+ }
+
+ th {
+     height: 70px;
+ }

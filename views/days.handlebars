@@ -1,23 +1,29 @@
- 
-<h1>Booked shifts</h1>
-  <div class="topClear">
-       <a href="/clear">
-        <button type="submit" id="clear"><i class="trash icon"></i></button>
-         </a> 
-  </div>
-<div class="box ">
-<div class="ui computer reversed half width grid moveDown">
-    <div class=" rows moveDown">
-        <div class="two row">
-            {{#each storedShifts}}
-            <ul id="shiftdays" >
-                <h6>{{day}}</h6>
-                {{#each Waiters}}
-                <li class="{{../color}}">{{this}}</li>
-                {{/each}}
-            </ul>
-            {{/each}}
-        </div>
+<div class="container">
+    <div class="container">
+        <h1>Weekly Schedule</h1>
+        <br>
+    
+        
+        <table>
+            <th>
+                <tr>
+                    {{#each list}}
+                    <th class="{{color}}">{{days}}</th>
+                    {{/each}}
+                </tr>
+            </th>
+            <tbody>
+                <tr>
+                    {{#each list}}
+                    <td>{{waiters}}</td>
+                    {{/each}}
+                </tr>
+            </tbody>
+        </table>
     </div>
-</div>
+    <br>
+    </form>
+    <button type="submit">Reset</button>
+    </form>
+    <button><a href="/">back</a></button>
 </div>
