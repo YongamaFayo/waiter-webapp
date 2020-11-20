@@ -14,7 +14,9 @@
  }
 
  .buttons {
-     block-size: 15em;
+     /* block-size: 15em; */
+     border-radius: 10%;
+     size: 30%;
  }
 
  .name {
@@ -29,7 +31,26 @@
      width: 100%;
      /* border: solid; */
  }
+ .LOGO{
+
+    color: rgb(139, 99, 70);
+    font-family: 'Courier New', Courier, monospace;
+ }
 
  th {
      height: 70px;
+ }
+
+ .btn{
+
+    border-radius: 5em; 
+    background-color: whitesmoke;
+    max-block-size: 10em;
+    
+
+ }
+ .h1{
+
+    color: rgb(139, 99, 70);
+    font-family: 'Courier New', Courier, monospace;
  }
