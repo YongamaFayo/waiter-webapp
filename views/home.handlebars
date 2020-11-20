@@ -1,0 +1,33 @@
+<h3>Waiter Availability </h3>
+    <div class="logout"> <a href="/logout"><i class="fa fa-sign-out sign-out"></i></a></div>
+<div class="container dashboard">
+    <h3 class="username">Hello,<span>{{username}}</span> </h3>
+  <br>
+    <form action="/waiters/{{username}}" method="post">
+        <table class="ui celled table" id="weekdays">
+            <tbody>
+                <tr>
+                    {{#each daynames}}
+                    <th>{{dayname}}</th>
+                    {{/each}}
+                </tr>
+                <tr>
+                    {{#each daynames}}
+                    <td>
+                        <input type="checkbox" name="dayname" id="" {{checkedDays}} value="{{dayname}}">
+                    </td>
+                    {{/each}}
+                </tr>
+        </table>
+        {{#if messages.info}}
+        <div class="shift">
+            <h3>{{messages.info}}</h3>
+        </div>
+        {{/if}}
+        <button type="submit" id="shift"><i class="plus square icon"></i>add</button>
+        </tbody>
+        </table>
+    </form>
+</div>
+
+<script src="/public/control.js"></script>

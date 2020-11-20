@@ -1,4 +1,55 @@
-<div class="container">
+<h3>Booked shifts</h3>
+
+<br>
+<br>
+<div class="box ">
+<div class="ui computer reversed half width grid moveDown">
+    <div class=" rows moveDown">
+        <div class="two row">
+            {{#each storedShifts}}
+            <ul id="shiftdays" >
+                <h6>{{day}}</h6>
+                {{#each Waiters}}
+                <li class="{{../color}}">{{this}}</li>
+                {{/each}}
+            </ul>
+            {{/each}}
+        </div>
+    </div>
+</div>
+</div>
+
+<br>
+<br>
+<br>
+<br>
+
+ 
+  <a href="/clear"><button type="button" class="clearBtn">Reset</button></a>
+  <input type="button" value="Back!" onclick="history.back()">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{{!-- <div class="container">
     <div class="container">
         <h1>Weekly Schedule</h1>
         <br>
@@ -23,7 +74,7 @@
     </div>
     <br>
     </form>
-    <button type="submit">Reset</button>
+    <button type="submit" class="btn">Reset</button>
     </form>
-    <button><a href="/">back</a></button>
-</div>
+    <button class="btn"><a href="/">back</a></button>
+</div> --}}
