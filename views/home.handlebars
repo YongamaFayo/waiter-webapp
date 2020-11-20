@@ -1,8 +1,9 @@
-<h3>Waiter Availability </h3>
-    <div class="logout"> <a href="/logout"><i class="fa fa-sign-out sign-out"></i></a></div>
 <div class="container dashboard">
     <h3 class="username">Hello,<span>{{username}}</span> </h3>
-  <br>
+    <br>
+    <h5>Please select your shift days </h5>
+    <br>
+    <br>
     <form action="/waiters/{{username}}" method="post">
         <table class="ui celled table" id="weekdays">
             <tbody>
@@ -26,8 +27,11 @@
         {{/if}}
         <button type="submit" id="shift"><i class="plus square icon"></i>add</button>
         </tbody>
+
         </table>
+
     </form>
+    <div class="logout"> <a href="/logout"><i class="fa fa-sign-out sign-out"></i></a></div>
 </div>
 
 <script src="/public/control.js"></script>
