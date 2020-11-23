@@ -34,10 +34,11 @@ module.exports = (pool) => {
             selectedShift.forEach(days => { 
                 let found = days.dayname;
                 if (current.dayname === found) {
-                    current.checked = true;
+                    current.checked = "checked";
                 }
             })
         }
+
         return storedDays.rows;
     }
 

@@ -77,6 +77,7 @@ app.get('/waiters/:username', async (req, res, next) => {
         let username = req.params.username;
         let findUser = await waiter.findusername(username);
         let weekdays = await waiter.getWeekdays(username);
+        console.log(weekdays);
         res.render('home', {
             daynames: weekdays,
             username,
