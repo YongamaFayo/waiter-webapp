@@ -1,34 +1,40 @@
 <h3>Booked shifts</h3>
 
 <br>
+
+<h5>{{color}}Red: More than 3 waiters booked</h5>
+<h5>Orange: Exactly 3 waiters booked  </h5>
+<h5>Green: Less than 3 waiters booked</h5>
+
+<br>
 <br>
 <div class="box ">
-<div class="ui computer reversed half width grid moveDown">
-    <div class=" rows moveDown">
-        <th>
-        <div class="two row">
-            {{#each storedShifts}}
-            <ul id="shiftdays" >
-                <h6>{{day}}</h6>
-                {{#each Waiters}}
-                <li class="{{../color}}">{{this}}</li>
-                {{/each}}
-            </ul>
-            {{/each}}
+    <div class="ui computer reversed half width grid moveDown">
+        <div class=" rows moveDown">
+
+            <div class="two row">
+                <tbody>
+                     {{#each storedShifts}} 
+                     <ul id="shiftdays">
+                        <h6 class="{{color}}">{{day}}</h6>
+                        {{#each Waiters}}
+                        <li >{{this}}</li>
+                        {{/each}}
+                        </ul>
+                        {{/each}}
+            </div>
         </div>
-        <th>
     </div>
 </div>
-</div>
 
 <br>
 <br>
 <br>
 <br>
 
- 
-  <a href="/clear"><button type="button" class="clearBtn">Reset</button></a>
-  <input type="button" value="Back!" onclick="history.back()">
+
+<a href="/clear"><button type="button" class="clearBtn">Reset</button></a>
+<input type="button" value="Back!" onclick="history.back()">
 
 
 

@@ -7,20 +7,20 @@ module.exports = (pool) => {
         }
     }
 
-    const findUser = async (username,job_Type) => {
-        if (username != undefined || username != "" 
-        && job_Type !==undefined || job_Type !=='') {
-            let found = await pool.query('SELECT * FROM waiterDB WHERE username=$1 And  position=$2 ', [username,job_Type]);
+    const findUser = async (username, job_Type) => {
+        if (username != undefined || username != ""
+            && job_Type !== undefined || job_Type !== '') {
+            let found = await pool.query('SELECT * FROM waiterDB WHERE username=$1 And  position=$2 ', [username, job_Type]);
             if (found.rowCount === 1) {
 
                 return found.rows[0].position;
-             } 
+            }
             else {
                 return true;
             }
         }
     }
-   
+
     const findusername = async (username) => {
         let found = await pool.query('SELECT full_name FROM waiterDB WHERE username=$1', [username]);
         return found.rows[0];
@@ -31,7 +31,7 @@ module.exports = (pool) => {
         let selectedShift = await findSelectedDays(username);
         for (let i = 0; i < storedDays.rowCount; i++) {
             let current = storedDays.rows[i];
-            selectedShift.forEach(days => { 
+            selectedShift.forEach(days => {
                 let found = days.dayname;
                 if (current.dayname === found) {
                     current.checked = "checked";
@@ -42,9 +42,9 @@ module.exports = (pool) => {
         return storedDays.rows;
     }
 
-    const addWaiter = async (username, full_name, position) => {
-        if (username !== "" && full_name !== "" && position !== "") {
-            await pool.query('INSERT INTO waiterDB (username,full_name,position) VALUES ($1,$2,$3)', [username, full_name, position]);
+    const addWaiter = async (username, full_name, job_Type) => {
+        if (username !== "" && full_name !== "" && job_Type !== "") {
+            await pool.query('INSERT INTO waiterDB (full_name,username,position) VALUES ($1,$2,$3)', [full_name, username, job_Type]);
             return true;
         } else {
             false;
@@ -52,14 +52,17 @@ module.exports = (pool) => {
     }
 
     const selectShift = async (shift) => {
-         console.log(shift)
+        //  console.log(shift.days + " Shift")
         const weekdays = shift.days;
+        // console.log(weekdays + " weekdays");
         const findUsernameID = await pool.query('SELECT id From waiterDB WHERE username=$1', [shift.username]);
+        // console.log()
         if (findUsernameID.rowCount > 0) {
             let userID = findUsernameID.rows[0].id;
             await pool.query('DELETE FROM dayShifts WHERE waiter_id =$1', [userID]);
             for (let day of weekdays) {
                 let findDayID = await pool.query('SELECT id From weekdays WHERE dayName=$1', [day]);
+                // console.log(findDayID)
                 await pool.query('INSERT INTO dayShifts (waiter_id,weekday_id) VALUES($1,$2)', [userID, findDayID.rows[0].id]);
             }
             return true;
@@ -80,7 +83,8 @@ module.exports = (pool) => {
 
     const groupByDay = async () => {
         let storedShifts = await allShifts();
-        const shiftArray = [{
+
+        let shiftArray = [{
             id: 0,
             day: 'Sunday',
             Waiters: []
@@ -111,32 +115,42 @@ module.exports = (pool) => {
         }]
 
         if (storedShifts.length > 0) {
-            for (let i = 0; i < storedShifts.length; i++) {
-                shiftArray.forEach(current => {
+
+            shiftArray.forEach(current => {
+                for (let i = 0; i < storedShifts.length; i++) {
                     if (current.day === storedShifts[i].dayname) {
                         current.Waiters.push(storedShifts[i].full_name);
                     }
-                    if (current.Waiters.length === 2) {
-                        current.color = "red";
-                    }
+                }
+            })
+
+            shiftArray.forEach(current => {
+                for (let i = 0; i < storedShifts.length; i++) {
                     if (current.Waiters.length > 3) {
-                        current.color = "orange";
+                        current.color = "red";
                     }
                     if (current.Waiters.length === 3) {
                         current.color = "green";
                     }
-                })
-            }
+                    if (current.Waiters.length < 3) {
+                        current.color = "orange";
+                    }
+                }
+            })
+
         }
+        console.log(shiftArray);
         return shiftArray;
     }
+
+
 
     const deleteShifts = async () => {
         let clear = await pool.query('DELETE FROM dayShifts');
         return clear.rows;
     }
     const findSelectedDays = async (username) => {
-            console.log(username)
+        console.log(username)
         let foundDays = await pool.query('SELECT dayName FROM dayShifts JOIN waiterDB ON waiterDB.id = dayShifts.waiter_id JOIN weekdays ON weekdays.id = dayShifts.weekday_id WHERE username=$1', [username]);
         return foundDays.rows;
     }
@@ -151,7 +165,7 @@ module.exports = (pool) => {
         clearShifts: deleteShifts,
         allShifts,
         groupByDay,
-        
+
 
 
     }

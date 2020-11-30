@@ -175,9 +175,9 @@ app.post("/waiters/:user", async function (req, res) {
         req.flash('error', 'select day')
     } else {
 
-        await waitersApp.selectedDay(user, days)
+        await waitersApp.selectedDay(user)
     }
-
+    days
     const daysList = await waitersApp.waitersDays(user)
     res.render("waiter", {
         waiter: user,
@@ -195,7 +195,7 @@ app.get("/waiters/:user", async function (req, res) {
 })
 
 app.get("/days", async function (req, res) {
-    var days = await waitersApp.schedule()
+    var days = await waitersApp.dayShift()
     res.render("days", {
         list: days,
     })
