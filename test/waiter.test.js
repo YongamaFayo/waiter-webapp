@@ -22,19 +22,19 @@ describe("waiter web-app", function () {
         const result = await pool.query(`select count(*) from waiters`)
         const results = result.rows[0].count
 
-        let funResults = await waiterFunction.getWaiters()
+        let funResults = await waiter.getWaiters()
         funResults = funResults.length
 
         assert.equal(funResults, results)
     })
 
     it("should be able to add a name to the waiters table and return it", async function () {
-        await waiterFunction.waiter("charl")
+        await waiter.waiter("general")
 
-        const result = await waiterFunction.getWaiters()
+        const result = await waiter.getWaiters()
         const results = result[0].waiters
 
-        assert.deepEqual("Charl", results)
+        assert.deepEqual("general", results)
     })
 
     it("should be able to assign a waiter to a specific day", async function () {
@@ -84,16 +84,16 @@ describe("waiter web-app", function () {
     })
 
     it("should be able to remove waiters from the database", async () => {
-        await waiterFunction.waiter("charl")
-        await waiterFunction.selectedDay("charl", ["monday", "tuesday", "saturday"])
-        await waiterFunction.waiter("charles")
-        await waiterFunction.selectedDay("charles", ["sunday", "tuesday", "friday"])
-        await waiterFunction.waiter("charly")
-        await waiterFunction.selectedDay("charly", ["sunday", "saturday", "friday"])
-        await waiterFunction.waiter("chark")
-        await waiterFunction.selectedDay("chark", ["monday", "wednsday", "thursday"])
+        // await waiter.waiter("charl")
+        await waiter.selectShift("General", ["monday", "tuesday", "saturday"])
+        // await waiter.waiter("General")
+        await waiter.selectedDay("General", ["sunday", "tuesday", "friday"])
+        // await waiter.waiter("Sheriff")
+        await waiter.selectedDay("Sheriff", ["sunday", "saturday", "friday"])
+        // await waiter.waiter("Ngamla")
+        await waiter.selectedDay("Don", ["monday", "wednsday", "thursday"])
 
-        await waiterFunction.clearWaiters()
+        await waiter.clearWaiters()
         const result = await pool.query("select count(*) from shifts");
         const results = result.rows[0].count
 

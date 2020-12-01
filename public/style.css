@@ -49,6 +49,11 @@
     
 
  }
+ .box{
+
+    table-layout: auto ;
+ }
+
  .h1{
 
     color: rgb(139, 99, 70);
