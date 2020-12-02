@@ -3,28 +3,29 @@
 <br>
 
 <h5>{{color}}Red: More than 3 waiters booked</h5>
-<h5>Green: Exactly 3 waiters booked  </h5>
+<h5>Green: Exactly 3 waiters booked </h5>
 <h5>Orange: Less than 3 waiters booked</h5>
 
-<br>
-<br>
+
 <div class="box ">
     <div class="ui computer reversed half width grid moveDown">
         <div class=" rows moveDown">
 
-            <div class="two row">
+            <div class="shifts">
                 <tbody>
-                     {{#each storedShifts}} 
-                     <ul id="shiftdays">
+                    {{#each storedShifts}}
+                    <ul id="shiftdays">
                         <h6 class="{{color}}">{{day}}</h6>
                         {{#each Waiters}}
-                        <li >{{this}}</li>
+                        <li>{{this}}</li>
                         {{/each}}
-                        </ul>
-                        {{/each}}
+                    </ul>
+                    {{/each}}
+                </tbody> 
             </div>
         </div>
     </div>
+</div>
 </div>
 
 <br>

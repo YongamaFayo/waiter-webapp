@@ -43,6 +43,7 @@ module.exports = (pool) => {
     }
 
     const addWaiter = async (username, full_name, job_Type) => {
+        
         if (username !== "" && full_name !== "" && job_Type !== "") {
             await pool.query('INSERT INTO waiterDB (full_name,username,position) VALUES ($1,$2,$3)', [full_name, username, job_Type]);
             return true;

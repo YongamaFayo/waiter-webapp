@@ -1,6 +1,7 @@
 const express = require('express')
 const exphbs = require('express-handlebars')
 const bodyParser = require('body-parser')
+// const lodash = ("lodash")
 
 
 
@@ -144,7 +145,9 @@ app.post('/signup', async (req, res, next) => {
         const { full_name, username, job_Type } = req.body;
         if (full_name !== undefined && username !== undefined
             && job_Type !== undefined && job_Type !== '') {
-            if (await waiter.addWaiter(full_name, username, job_Type)) {
+            var name = full_name.charAt(0).toUpperCase() + full_name.slice(1).toLowerCase()
+            var nickName = username.charAt(0).toUpperCase() + username.slice(1).toLowerCase()
+            if (await waiter.addWaiter(name, nickName, job_Type)) {
                 req.flash('info', 'Succesfully registered');
             } else {
                 req.flash('error', 'incorrect details');
